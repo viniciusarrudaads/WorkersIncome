@@ -40,10 +40,7 @@ namespace Enumeração.Entities
                 contract = new HourContract(date, valuePerHour, hours);
             
             }
-            
-
-        
-        
+       
         }
 
         public void RemoveContract(HourContract contract)
@@ -54,18 +51,17 @@ namespace Enumeração.Entities
         {
             HourContract contract = new HourContract();
 
-            Console.WriteLine("What month you want to calculate the income? ");
-            string incomeDate = Console.ReadLine();
-
-            string[] monthYear = incomeDate.Split('/'); // split para atribuir a data aos dois parametros
-
-            month = int.Parse(monthYear[0]);
-            year = int.Parse(monthYear[1]);
 
             return contract.TotalValue() + BaseSalary;
 
-
         }
+
+        public override string ToString()
+        {
+            return "Name: " + Name + Income;
+        }
+
+ 
 
     }
 }
