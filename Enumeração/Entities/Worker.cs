@@ -8,52 +8,44 @@ namespace Enumeração.Entities
         public string Name { get; set; } = string.Empty;
         public Level WorkerLevel { get; set; }
         public decimal BaseSalary { get; private set; }
+        public List<HourContract> Contract { get; private set;  } = new List<HourContract>();
+        public Department Department { get; set; }
 
 
-        public Worker(string name, Level workerLevel, decimal baseSalary)
+        public Worker() { }
+        public Worker(string name, Level workerLevel, decimal baseSalary, Department department)
         {
             Name = name;
             WorkerLevel = workerLevel;
             BaseSalary = baseSalary;
+            Department = department;
         }
 
 
         public void AddContract(HourContract contract){
-             List<HourContract> list = new List<HourContract>();
-
-            Console.WriteLine("How many contracts you want to register? ");
-            int n = int.Parse(Console.ReadLine());
-
-            for (int i = 0; i < n; i++) {
-                Console.WriteLine("CONTRACT #"+ (i+1));
-                Console.WriteLine();
-
-                Console.WriteLine("Date DD/MM/YYYY: ");
-                DateOnly date = DateOnly.Parse(Console.ReadLine());
-
-                Console.WriteLine("Value per hour: ");
-                decimal valuePerHour = decimal.Parse(Console.ReadLine());
-
-                Console.WriteLine("Hours: ");
-                int hours = int.Parse(Console.ReadLine());
-
-                contract = new HourContract(date, valuePerHour, hours);
+            Contract.Add(contract);
             
-            }
        
         }
 
         public void RemoveContract(HourContract contract)
         {
+            Contract.Remove(contract);
         }
 
         public decimal Income(int month, int year)
         {
-            HourContract contract = new HourContract();
+            decimal sum = BaseSalary;
 
+            foreach(HourContract contract in Contract)
+            {
+                if (contract.Date.Month == month && contract.Date.Year == year)
+                {
+                    return sum += contract.TotalValue();
 
-            return contract.TotalValue() + BaseSalary;
-
+                }
+            }
+            return sum;
         }
 
         public override string ToString()

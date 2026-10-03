@@ -1,35 +1,20 @@
 ﻿using Enumeração.Entities.Enums;
 using Enumeração.Entities;
+using Enumeração.Services;
 namespace Enumeração;
 
 class Program
 {
     static void Main(string[] args)
     {
+        Worker worker = new Worker();
+        HourContract contract = new HourContract();
+        Department dp = new Department();
+
+
+        WorkerServices.AddWorker(worker);
+        ContractServices.AddContract(contract);
         
-        Department department = new Department();
-        HourContract hourContract = new HourContract();
-
-        Console.WriteLine("Department: ");
-        string dp = Console.ReadLine();
-        dp = department.Name;
-        
-        
-        Console.WriteLine("Worker Name:");
-        string name = Console.ReadLine();
-
-        Console.WriteLine("Worker level (Junior, Mid_Level,Senior)");
-        string level = Console.ReadLine();
-
-        Level seniority = Enum.Parse<Level>(level);
-
-        Console.WriteLine("Base salary: ");
-        decimal baseSalary = decimal.Parse(Console.ReadLine());
-
-        Worker worker = new Worker(name,seniority, baseSalary);
-
-        worker.AddContract(hourContract);
-
         Console.WriteLine("What month you want to calculate the income? ");
         string incomeDate = Console.ReadLine();
 
@@ -40,7 +25,12 @@ class Program
 
         worker.Income(month, year);
 
-        Console.WriteLine(worker);
+        Console.WriteLine("Name: " + worker.Name);
+        Console.WriteLine("Department: "+dp.Name);
+        Console.WriteLine("Income for: " + monthYear + ": " + worker.Income(month, year));
+
+
+        
 
     }
 
