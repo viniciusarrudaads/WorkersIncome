@@ -7,7 +7,7 @@ namespace Enumeração.Entities
     {
         public string Name { get; set; } = string.Empty;
         public Level WorkerLevel { get; set; }
-        public decimal BaseSalary { get; private set; }
+        public decimal BaseSalary { get; set; }
         public List<HourContract> Contract { get; private set;  } = new List<HourContract>(); // estamos associando o contrato ao worker
         public Department Department { get; set; } // e a classe department também
 
@@ -24,8 +24,7 @@ namespace Enumeração.Entities
 
         public void AddContract(HourContract contract){
             Contract.Add(contract); // utilizando o método das listas '' add '' para adicionar o contrato
-            
-       
+         
         }
 
         public void RemoveContract(HourContract contract)
@@ -41,7 +40,7 @@ namespace Enumeração.Entities
             {
                 if (contract.Date.Month == month && contract.Date.Year == year)
                 {
-                    return sum += contract.TotalValue();
+                     sum += contract.TotalValue();
 
                 }
             }

@@ -1,23 +1,63 @@
-﻿using Enumeração.Entities.Enums;
-using Enumeração.Entities;
-using Enumeração.Services;
+﻿using Enumeração.Entities;
+using Enumeração.Entities.Enums;
 namespace Enumeração;
 
 class Program
 {
     static void Main(string[] args)
     {
-        Worker worker = WorkerServices.AddWorker();
-        HourContract contract = ContractServices.AddContract();
-        Department dp = new Department();
-        IncomeServices.CalculateIncome(worker);
+        Console.WriteLine("Department: ");
+        string dpName = Console.ReadLine();
 
-        Console.WriteLine("Name: " + worker.Name);
-        Console.WriteLine("Department: "+worker.Department.Name);
+        Console.WriteLine("Worker Name:");
+        string name = Console.ReadLine();
+
+        Console.WriteLine("Worker level (Junior, Mid_Level,Senior)");
+        string level = Console.ReadLine();
+
+        Level seniority = Enum.Parse<Level>(level);
         
-
-
+        Console.WriteLine("Base salary: ");
+        decimal baseSalary = decimal.Parse(Console.ReadLine());
         
+        Department dp = new Department(dpName);
+        Worker worker = new Worker(name, seniority, baseSalary, dp);
+
+        Console.WriteLine("How many contracts you want to register? ");
+        int n = int.Parse(Console.ReadLine());
+
+        for (int i = 0; i < n; i++)
+        {
+            Console.WriteLine("CONTRACT #" + (i + 1));
+            Console.WriteLine();
+
+            Console.WriteLine("Date DD/MM/YYYY: ");
+            DateTime date = DateTime.Parse(Console.ReadLine());
+
+            Console.WriteLine("Value per hour: ");
+            decimal valuePerHour = decimal.Parse(Console.ReadLine());
+
+            Console.WriteLine("Hours: ");
+            int hours = int.Parse(Console.ReadLine());
+
+            HourContract contract = new HourContract(date, valuePerHour, hours);
+            worker.AddContract(contract);
+        }
+
+        Console.WriteLine("What month you want to calculate the income? ");
+        string incomeDate = Console.ReadLine();
+
+        string[] monthYear = incomeDate.Split('/'); // split para atribuir a data aos dois parametros
+
+        int month = int.Parse(monthYear[0]);
+        int year = int.Parse(monthYear[1]);
+
+        worker.Income(month, year);
+
+        Console.WriteLine($"Name:{worker.Name} ");
+        Console.WriteLine($"Department: {dp.Name}");
+        Console.WriteLine($"Income for {month}/{year}:{worker.Income(month,year)}");
+
 
     }
 

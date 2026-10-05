@@ -19,7 +19,7 @@ public class HourContract
 
     public decimal TotalValue()
     {
-        return ValuePerHour * Hours;
+        return Hours * ValuePerHour;
 
     }
 
