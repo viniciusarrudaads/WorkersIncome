@@ -6,9 +6,9 @@ namespace Enumeração.Services;
 public class ContractServices
 {
 
-    public static void AddContract(HourContract contract)
+    public static HourContract AddContract()
     {
-        Worker worker = new Worker();
+        HourContract contract = new HourContract();
         Console.WriteLine("How many contracts you want to register? ");
         int n = int.Parse(Console.ReadLine());
 
@@ -26,12 +26,10 @@ public class ContractServices
             Console.WriteLine("Hours: ");
             int hours = int.Parse(Console.ReadLine());
 
-            contract = new HourContract(date, valuePerHour, hours);
-
-            worker.AddContract(contract);
-
-
+           contract = new HourContract(date, valuePerHour, hours);
         }
+
+        return contract;
 
 
     }

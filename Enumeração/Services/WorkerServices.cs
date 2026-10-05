@@ -4,7 +4,7 @@ namespace Enumeração.Services;
 
 public class WorkerServices
 {
-    public static void AddWorker(Worker worker)
+    public static Worker AddWorker()
     {
         Console.WriteLine("Department: ");
         string dpName = Console.ReadLine();
@@ -21,7 +21,7 @@ public class WorkerServices
         decimal baseSalary = decimal.Parse(Console.ReadLine());
 
         Department dp = new Department(dpName);       
-        worker = new Worker(name, seniority, baseSalary,dp);
+         return new Worker(name, seniority, baseSalary,dp);
     }
 
 

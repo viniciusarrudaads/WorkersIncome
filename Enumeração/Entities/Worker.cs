@@ -8,8 +8,8 @@ namespace Enumeração.Entities
         public string Name { get; set; } = string.Empty;
         public Level WorkerLevel { get; set; }
         public decimal BaseSalary { get; private set; }
-        public List<HourContract> Contract { get; private set;  } = new List<HourContract>();
-        public Department Department { get; set; }
+        public List<HourContract> Contract { get; private set;  } = new List<HourContract>(); // estamos associando o contrato ao worker
+        public Department Department { get; set; } // e a classe department também
 
 
         public Worker() { }
@@ -23,7 +23,7 @@ namespace Enumeração.Entities
 
 
         public void AddContract(HourContract contract){
-            Contract.Add(contract);
+            Contract.Add(contract); // utilizando o método das listas '' add '' para adicionar o contrato
             
        
         }
@@ -37,7 +37,7 @@ namespace Enumeração.Entities
         {
             decimal sum = BaseSalary;
 
-            foreach(HourContract contract in Contract)
+            foreach(HourContract contract in Contract) // aqui estamos usando um foreach para poder percorrer o contrato e verificar se a condição de month e year estão corretas.
             {
                 if (contract.Date.Month == month && contract.Date.Year == year)
                 {
@@ -47,13 +47,6 @@ namespace Enumeração.Entities
             }
             return sum;
         }
-
-        public override string ToString()
-        {
-            return "Name: " + Name + Income;
-        }
-
- 
 
     }
 }
