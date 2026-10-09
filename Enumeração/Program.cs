@@ -47,10 +47,8 @@ class Program
         Console.WriteLine("What month you want to calculate the income? ");
         string incomeDate = Console.ReadLine();
 
-        string[] monthYear = incomeDate.Split('/'); // split para atribuir a data aos dois parametros
-
-        int month = int.Parse(monthYear[0]);
-        int year = int.Parse(monthYear[1]);
+        int month = int.Parse(incomeDate.Substring(0,2));
+        int year = int.Parse(incomeDate.Substring(3));   //08/2026
 
         worker.Income(month, year);
 
